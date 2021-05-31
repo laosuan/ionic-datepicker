@@ -66,7 +66,7 @@ angular.module('ionic-datepicker.provider', [])
       };
 
       var changeDaySelected = function() {
-        var newSelectedDate = new Date($scope.selctedDateEpoch);
+        var newSelectedDate = new Date($scope.selctedDateEpoch[0]);
         newSelectedDate.setMonth($scope.currentDate.getMonth());
         newSelectedDate.setYear($scope.currentDate.getFullYear());
         $scope.selctedDateEpoch = newSelectedDate.getTime();
@@ -76,7 +76,13 @@ angular.module('ionic-datepicker.provider', [])
       //Date selected
       $scope.dateSelected = function (selectedDate) {
         if (!selectedDate || Object.keys(selectedDate).length === 0) return;
-        $scope.selctedDateEpoch = selectedDate.epoch;
+        var index = $scope.selctedDateEpoch.indexOf(selectedDate.epoch >= 0);
+        if (index >= 0) {
+          $scope.selctedDateEpoch.splice(index, 1);
+        } else {
+          $scope.selctedDateEpoch.push(selectedDate.epoch);
+        }
+
         if ($scope.mainObj.closeOnSelect) {
           $scope.mainObj.callback($scope.selctedDateEpoch);
           if ($scope.mainObj.templateType.toLowerCase() == 'popup') {
@@ -186,7 +192,7 @@ angular.module('ionic-datepicker.provider', [])
       //Setting up the initial object
       function setInitialObj(ipObj) {
         $scope.mainObj = angular.copy(ipObj);
-        $scope.selctedDateEpoch = resetHMSM($scope.mainObj.inputDate).getTime();
+        $scope.selctedDateEpoch = [resetHMSM($scope.mainObj.inputDate).getTime()];
 
         if ($scope.mainObj.weeksList && $scope.mainObj.weeksList.length === 7) {
           $scope.weeksList = $scope.mainObj.weeksList;
@@ -269,9 +275,9 @@ angular.module('ionic-datepicker.provider', [])
                 disabled: false
               };
               $scope.dateSelected(today_obj);
-              
+
               refreshDateList(new Date());
-              $scope.selctedDateEpoch = resetHMSM(today).getTime();
+              $scope.selctedDateEpoch = [resetHMSM(today).getTime()];
               $scope.mainObj.callback($scope.selctedDateEpoch);
               if (!$scope.mainObj.closeOnSelect) {
                 e.preventDefault();

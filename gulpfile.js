@@ -44,7 +44,7 @@ gulp.task('css2js', function () {
     .pipe(sass(sassOptions).on('error', sass.logError))
     .pipe(autoprefixer(autoprefixerOptions))
     .pipe(css2js())
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(gulp.dest("./dist/"));
 });
 

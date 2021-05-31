@@ -2,6 +2,7 @@
 
 ##Introduction:
 
+
 This is an `ionic-datepicker` bower component, which can be used in any Ionic framework's application. No additional plugins required for this component.
 This plugin is completely open source. Please rate this plugin @ [Ionic Market](http://market.ionic.io/plugins/ionicdatepicker)
 
@@ -19,6 +20,17 @@ From version 1.0.0, this component has got so many new features and the way you 
 * gulp
 
 ##How to use:
+nvm install 10.0.0
+nvm use 10.0.0
+npm install --global gulp-cli
+npm install --global yarn
+yarn install
+npm install —save-dev gulp@3.9.1
+
+把gulp.file中 .pipe(uglify())全部注释
+运行gulp buld
+
+
 
 1) In your project folder, please install this plugin using bower
 
